@@ -15,5 +15,5 @@ public abstract class BaseScrapingFigure {
     //extracts data from each character URL and writes it to a JSON file.
     public abstract void getFigureData(List<String> allUrl) ;
 
-//    public abstract void start();  ????
+
 }
