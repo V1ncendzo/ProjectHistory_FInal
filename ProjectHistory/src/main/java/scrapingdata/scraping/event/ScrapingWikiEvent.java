@@ -61,16 +61,15 @@ public class ScrapingWikiEvent extends ScrapingEvent {
             try {
                 Document doc = Jsoup.connect(url).timeout(120000).get();
 
-                String name = "Chưa rõ"; // Ten su kien
-                String time = "Chưa rõ"; // Thoi gian dien ra su kien
-                String location = "Chưa rõ"; // Dia diem dien ra su kien
-                String reason = "Chưa rõ"; // Nguyen nhan dien ra su kien
-                String description = "Chưa rõ"; // Mo ta ngan gon ve tran chien
-                String result = "Chưa rõ"; // Ket qua cua su kien
+                String name = "Chưa rõ";
+                String time = "Chưa rõ";
+                String location = "Chưa rõ";
+                String reason = "Chưa rõ";
+                String description = "Chưa rõ";
+                String result = "Chưa rõ";
                 ArrayList<String> relatedChar = new ArrayList<>();
 
-                // Lay ten cua su kien
-                // Lay tu the div dau tien truoc
+
                 Element firstPageHeader = doc.selectFirst("div[class=page-header]");
                 if (firstPageHeader != null) {
                     firstPageHeader.select("sup").remove();
@@ -92,7 +91,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                         if (tableDatas != null) {
                             if (tableDatas.size() > 1) {
                                 tableDatas.get(0).select("sup").remove();
-                                tableDatas.get(1).select("sup").remove();   // loai bo cac chi so tren dau
+                                tableDatas.get(1).select("sup").remove();
                                 String title = tableDatas.get(0).text();
                                 // System.out.println(title);
                                 if (title.equals("Thời gian") && time.equals("Chưa rõ")) {
@@ -113,16 +112,16 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                 Element contentBody = doc.selectFirst("div[class=com-content-article__body]");
                 Elements contentBodyELements = contentBody.children();
                 boolean firstPFound = false;
-                // Loc tu doan p dau tien, co the thieu thong tin
+
                 for (Element item : contentBodyELements) {
                     if (item.tagName().equals("p")) {
                         if (!firstPFound) {
                             firstPFound = true;
                             Element firstParagraph = item;
-                            firstParagraph.select("sup").remove(); // [class~=(annotation).*]
+                            firstParagraph.select("sup").remove();
                             String firstPContent = firstParagraph.text();
 
-                            // The b dau tien la ten cua su kien, co the gom ca thoi gian
+
                             Element firstBTag = firstParagraph.selectFirst("b");
                             if (firstBTag != null) {
                                 String firstBTagContent = firstBTag.text();
@@ -138,7 +137,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                                 }
                             }
 
-                            // Loc ra mo ta ngan gon cua tran chien
+
                             Pattern p = Pattern.compile("là[^.]*[.]");
                             Matcher m = p.matcher(firstPContent);
 
@@ -149,7 +148,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                                 }
                             }
 
-                            // Loc ra ket qua cua su kien
+
                             p = Pattern.compile("(Kết quả|cuối cùng)[^.]*[.]", Pattern.CASE_INSENSITIVE);
                             m = p.matcher(firstPContent);
 
@@ -160,7 +159,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                                 }
                             }
 
-                            // Loc ra thoi gian cua su kien
+
                             p = Pattern.compile("(xảy ra|diễn ra) (từ|vào)[^.]*[.]", Pattern.CASE_INSENSITIVE);
                             m = p.matcher(firstPContent);
 
@@ -171,7 +170,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                                 }
                             }
 
-                            // Loc ra nguyen nhan cua tran chien
+
                             p = Pattern.compile("(nhằm|bắt nguồn|do)[^.]*[.]", Pattern.CASE_INSENSITIVE);
                             m = p.matcher(firstPContent);
 
@@ -183,7 +182,7 @@ public class ScrapingWikiEvent extends ScrapingEvent {
                             }
                         }
 
-                        // Lay ra cac thẻ a tim duoc trong p
+
                         Elements pATags = item.select("a");
                         for (Element a : pATags) {
                             String hrefValue = a.attr("href");

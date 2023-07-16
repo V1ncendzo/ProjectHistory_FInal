@@ -34,7 +34,7 @@ public class ScrapingVuaWiki extends BaseScrapingFigure {
             for (Element subRwo : row) {
                 Element name = subRwo.select("td").get(1);
                 Element y = name.getElementsByTag("a").get(0);
-                figureLinks.add(y.attr("href")); // Link to character page
+                figureLinks.add(y.attr("href"));
             }
         }
         return figureLinks;
