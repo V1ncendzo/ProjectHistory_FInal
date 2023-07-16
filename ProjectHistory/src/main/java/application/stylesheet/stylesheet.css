@@ -1,0 +1,19 @@
+.background {
+  -fx-background-image: url("../images/background.png");
+  -fx-background-color: transparent;
+  -fx-background-size: cover;
+}
+
+.search-box {
+  -fx-background-radius: 100;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+  -fx-background-image: url("../images/background.png");
+}
+
+/* .vbox {
+  -fx-background-image: url("../images/background.png");
+  -fx-background-color: transparent;
+} */

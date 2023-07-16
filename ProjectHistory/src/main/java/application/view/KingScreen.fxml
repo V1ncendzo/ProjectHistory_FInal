@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.KingScreenController">
+    <left>
+        <fx:include fx:id="sideBar" source="Sidebar.fxml" />
+    </left>
+    <center>
+        <VBox styleClass="background" stylesheets="@../stylesheet/stylesheet.css" BorderPane.alignment="CENTER">
+            <children>
+            <Label alignment="CENTER" prefHeight="64.0" prefWidth="844.0" text="Vua" textAlignment="CENTER">
+               <font>
+                  <Font name="Constantia" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="-8.0" top="8.0" />
+               </VBox.margin>
+            </Label>
+                <fx:include fx:id="searchBar" source="SearchBar.fxml" />
+                <HBox alignment="CENTER" prefHeight="400.0" prefWidth="146.0" VBox.vgrow="ALWAYS">
+                    <children>
+                  <TableView fx:id="kingTable" prefHeight="480.0" prefWidth="850.0">
+                    <columns>
+                      <TableColumn fx:id="colKingId" maxWidth="150.0" prefWidth="150.0" text="ID" />
+                      <TableColumn fx:id="colKingName" prefWidth="492.79998779296875" text="Tên" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
